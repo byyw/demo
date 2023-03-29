@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <input id="url" style="width:500px;" value="http://192.168.1.77:8080/send">
+        <input id="time" style="width:50px;" value="1">
+        <div style="display: inline-block;"><button onclick="playVideo()">on</button></div>
+    </div>
+    <div>
+        <div style="width:50px;display: inline-block;">id:</div>
+        <input id="id" style="width:445px;">
+    </div>
+    <div>
+        <div style="width:50px;display: inline-block;">msg:</div>
+        <input id="msg" style="width:445px;">
+    </div>
+    <textarea id="res" style="width:500px;height: 500px;"></textarea>
+</body>
+
+<script type="text/javascript">
+    function playVideo() {
+        var url = $("#url").val();
+        var id = $("#id").val();
+        var msg = $("#msg").val();
+        var time = $("#time").val();
+        var json={};
+        json["id"] = id;
+        json["message"] = msg;
+        $("#res").append(">>> "+json["message"]+"\n");
+        for(var i=0;i<time;i++){
+            $.ajax({
+                url: url,
+                data: JSON.stringify(json),
+                dataType: "json",
+                contentType: "application/json",
+                type: "post",
+                success: function (res) {
+                    $("#res").append("<<< "+res.msg+"\n");
+                }
+            });
+        }
+    }
+</script>
+
+</html>
