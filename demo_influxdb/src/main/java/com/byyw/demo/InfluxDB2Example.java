@@ -70,9 +70,9 @@ public class InfluxDB2Example {
 
     public static void queryByFlux() {
         // String flux = """
-        //     from(bucket:\"test\") 
+        //     from(bucket:"test") 
         //     |> range(start: 2010-01-01T00:00:00.000Z, stop: 2023-01-01T00:00:00.000Z)
-        //     |> filter(fn: (r) => r[\"_measurement\"] == \"home\")
+        //     |> filter(fn: (r) => r["_measurement"] == "home")
         // """;
         String flux = """
             from(bucket: "test")
@@ -95,9 +95,36 @@ public class InfluxDB2Example {
 
     public static void queryByInfluxQL() {
         String sql = """
-            SELECT * FROM location
+            SELECT * FROM "location"
+                """;
+        
+        sql = """
+            select * from "location" where tag1='tag1_0'
+                """;
+        
+        sql = """
+            select MEAN("val1") AS "val1", MIN("time") AS "minTime", MAX("time") AS "maxTime" from "location" where tag1='tag1_1' group by time(5m) fill(none)
+                """;    // 语法没问题，不过数据字段不对
+
+        sql = """
+            select MAX("val1") AS "val1", MIN("time") AS "minTime", MAX("time") AS "maxTime" from "location" where tag1='tag1_2' group by time(1h) fill(none)
                 """;
 
+        sql = """
+            select MAX("val1") AS "val1", MIN("time") AS "minTime", MAX("time") AS "maxTime" from "location" where tag1='tag1_3' group by time(1d) fill(none)
+                """;
+
+        sql = """
+            select * from "location" where tag1='tag1_4' and val1>20
+                """;
+
+        sql = """
+            select * from "location" where tag1='tag1_0' or tag1='tag1_3'
+                """;
+
+        sql = """
+            select * from "location" where '2023-03-01 00:00:00'<time and time<'2023-03-01 12:00:00'
+                """;
         InfluxQLQueryResult result = client.getInfluxQLQueryApi().query(new InfluxQLQuery(sql, "test").setPrecision(InfluxQLQuery.InfluxQLPrecision.SECONDS));
 
         for (InfluxQLQueryResult.Result resultResult : result.getResults()) {
