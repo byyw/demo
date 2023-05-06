@@ -1,0 +1,22 @@
+spring:
+  # mysql 配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+
+    url: jdbc:mysql://172.16.0.14:3306/testbase?useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 5
+      idle-timeout: 30000
+      
+#mybatis是独立节点，需要单独配置
+mybatis-plus:
+  global-config:
+    id-type: 0
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  # type-aliases-package: com.hzfjzn.nettyServer.entity
+  configuration:
+    map-underscore-to-camel-case: true
