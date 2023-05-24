@@ -1,4 +1,4 @@
-package com.byyw.demo;
+package com.byyw.demo.mapper;
 
 import java.util.List;
 import java.util.Map;
