@@ -10,7 +10,6 @@ import com.google.common.eventbus.Subscribe;
 
 import cn.hutool.json.JSONObject;
 import jakarta.annotation.PostConstruct;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
