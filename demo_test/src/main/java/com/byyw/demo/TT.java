@@ -22,17 +22,16 @@ public class TT {
     public void test() throws Exception {
     }
 
-    public void a1() throws Exception {
-        while (true) {
-            for (int i = 0; i < 1000; i++) {
-                String id = String.format("%03d", i);
-                HttpClientUtils.sendAsyncPost("http://192.168.1.77:8083/faceRcognition/heart?SerialNo=5R17R300" + id
-                        + "&DevName=Cam1&Left=992", null);
-            }
-            Thread.sleep(2000);
-            System.out.println(111);
-        }
+    public static void main(String[] args) {
+        T1("123");
+    }
 
+    public static void T1(Object a) {
+        System.out.println("Object");
+    }
+
+    public static void T1(String a) {
+        System.out.println("String");
     }
 
 }
