@@ -8,12 +8,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
-@Configurable
+@Configuration
 public class EventBusConfig {
     
     @Bean
