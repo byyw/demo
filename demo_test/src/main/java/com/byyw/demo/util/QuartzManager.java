@@ -16,9 +16,9 @@ import org.quartz.SchedulerFactory;
 import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.quartz.TriggerKey;
 import org.quartz.impl.StdSchedulerFactory;
-
-import com.byyw.demo.util.ScheduleManager.TJob;
+import org.quartz.impl.matchers.GroupMatcher;
 
 public class QuartzManager {
 
@@ -28,19 +28,42 @@ public class QuartzManager {
         Scheduler scheduler = factory.getScheduler();
         scheduler.start();
 
-        JobDataMap jobDataMap = new JobDataMap();
-        JobDetail job = JobBuilder.newJob(MyJob.class)
-                .withIdentity("1", "1")
-                .usingJobData(jobDataMap)
-                .build();
+        // JobDataMap jobDataMap = new JobDataMap();
+        // JobDetail job = JobBuilder.newJob(MyJob.class)
+        // .withIdentity("1", "1")
+        // .usingJobData(jobDataMap)
+        // .build();
 
-        Trigger tr = TriggerBuilder.newTrigger()
-                .withIdentity("1", "1")
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                        .withIntervalInMilliseconds(1000)
-                        .withRepeatCount(0))
-                .build();
-        scheduler.scheduleJob(job, tr);
+        // Trigger tr = TriggerBuilder.newTrigger()
+        // .withIdentity("0", "1")
+        // .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+        // .withIntervalInMilliseconds(1000)
+        // .withRepeatCount(1))
+        // .build();
+
+        // scheduler.scheduleJob(job, tr);
+        int i = 1;
+        while (true) {
+            JobDataMap jobDataMap = new JobDataMap();
+            JobDetail job = JobBuilder.newJob(MyJob.class)
+                    .withIdentity("" + i, "1")
+                    .usingJobData(jobDataMap)
+                    .build();
+
+            Trigger tr = TriggerBuilder.newTrigger()
+                    .withIdentity("" + i, "1")
+                    .startNow()
+                    .build();
+
+            scheduler.scheduleJob(job, tr);
+
+            i++;
+            try {
+                Thread.sleep(1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static class MyJob implements Job {

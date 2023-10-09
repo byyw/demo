@@ -4,9 +4,14 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
 
-    url: jdbc:mysql://localhost:3306/temp?useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true&characterEncoding=utf8
+    # url: jdbc:mysql://localhost:3306/test?useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true&characterEncoding=utf8
+    # username: root
+    # password: 123456
+
+    url: jdbc:mysql://47.94.95.112:3306/fj?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true&autoReconnect=true
     username: root
-    password: 123456
+    password: al@sk0987LKsd#
+
     type: com.alibaba.druid.pool.DruidDataSource
     hikari:
       maximum-pool-size: 15
@@ -18,6 +23,5 @@ mybatis-plus:
   global-config:
     id-type: 0
   mapper-locations: classpath*:mapper/**/*Mapper.xml
-  # type-aliases-package: com.hzfjzn.nettyServer.entity
   configuration:
     map-underscore-to-camel-case: true

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan({
-	"com.byyw.demo"
+	"com.byyw.demo.mapper"
 })
 public class DemoApplication {
 
